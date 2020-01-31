@@ -1,19 +1,21 @@
 package tapkomet.springframework.recipe.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Tapkomet on 1/31/2020
  */
 @Entity
-public class UnitOfMeasure {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
 
-    @OneToOne
-    private Ingredient ingredient;
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes;
 
     public Long getId() {
         return id;
@@ -31,11 +33,11 @@ public class UnitOfMeasure {
         this.name = name;
     }
 
-    public Ingredient getIngredient() {
-        return ingredient;
+    public Set<Recipe> getRecipes() {
+        return recipes;
     }
 
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }
