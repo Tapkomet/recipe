@@ -1,6 +1,7 @@
 package tapkomet.springframework.recipe.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Tapkomet on 12/19/2019
@@ -22,6 +23,9 @@ public class Recipe {
 
     @Lob
     private Byte[] image;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
@@ -104,5 +108,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
