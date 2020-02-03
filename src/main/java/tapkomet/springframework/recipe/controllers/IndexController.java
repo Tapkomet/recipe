@@ -1,13 +1,9 @@
 package tapkomet.springframework.recipe.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tapkomet.springframework.recipe.domain.Category;
-import tapkomet.springframework.recipe.domain.UnitOfMeasure;
-import tapkomet.springframework.recipe.repositories.CategoryRepository;
-import tapkomet.springframework.recipe.repositories.UnitOfMeasureRepository;
-
-import java.util.Optional;
+import tapkomet.springframework.recipe.services.RecipeService;
 
 /**
  * Created by Tapkomet on 12/18/2019
@@ -15,22 +11,16 @@ import java.util.Optional;
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage(){
+    public String getIndexPage(Model model) {
 
-        Optional<Category> categoryOptional = categoryRepository.findByName("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByName("Teaspoon");
-
-        System.out.println("Cat id is "+categoryOptional.get().getId());
-        System.out.println("UoM id is "+unitOfMeasureOptional.get().getId());
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
