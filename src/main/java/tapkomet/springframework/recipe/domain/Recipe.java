@@ -1,6 +1,7 @@
 package tapkomet.springframework.recipe.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
  * Created by Tapkomet on 12/19/2019
  */
 @Data
+@EqualsAndHashCode(exclude = {"ingredients", "notes", "categories"})
 @Entity
 public class Recipe {
 
