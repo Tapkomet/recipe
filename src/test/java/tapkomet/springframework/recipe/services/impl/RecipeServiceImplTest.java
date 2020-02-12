@@ -9,6 +9,7 @@ import tapkomet.springframework.recipe.repositories.RecipeRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,9 @@ class RecipeServiceImplTest {
 
 
     private static final Recipe TEST_RECIPE = new Recipe();
-    private static final Recipe[] RECIPES_ARRAY = new Recipe[] {TEST_RECIPE, new Recipe()};
+    private static final Recipe[] RECIPES_ARRAY = new Recipe[]{TEST_RECIPE, new Recipe()};
     private static final Set<Recipe> TEST_RECIPES = new HashSet<>(Arrays.asList(RECIPES_ARRAY));
+    private static final Long RECIPE_ID = 1L;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -40,5 +42,21 @@ class RecipeServiceImplTest {
 
         assertEquals(1, recipeService.getRecipes().size());
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findRecipeById() throws Exception {
+
+        Recipe recipe = new Recipe();
+        recipe.setId(RECIPE_ID);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe returnedRecipe = recipeService.findById(RECIPE_ID);
+
+        assertNotNull(returnedRecipe, "Null recipe returned");
+        verify(recipeRepository, times(1)).findById(RECIPE_ID);
+        verify(recipeRepository, never()).findAll();
     }
 }

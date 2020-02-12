@@ -7,6 +7,7 @@ import tapkomet.springframework.recipe.repositories.RecipeRepository;
 import tapkomet.springframework.recipe.services.RecipeService;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,9 +22,20 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Set<Recipe> getRecipes() {
-        log.debug("Recipe servce logging example");
+        log.debug("Getting all recipes");
         Set<Recipe> recipeSet = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
         return recipeSet;
+    }
+
+    @Override
+    public Recipe findById(Long id) throws RuntimeException {
+        log.debug("Looking for recipe by id: " + id);
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isPresent()) {
+            return optionalRecipe.get();
+        } else {
+            throw new RuntimeException();
+        }
     }
 }
