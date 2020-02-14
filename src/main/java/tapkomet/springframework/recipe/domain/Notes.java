@@ -10,6 +10,9 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Notes {
 
     @Id
