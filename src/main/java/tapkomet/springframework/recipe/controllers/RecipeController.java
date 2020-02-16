@@ -16,7 +16,7 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
-    public RecipeController(RecipeService recipeService) {
+    RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
@@ -43,6 +43,14 @@ public class RecipeController {
         log.debug("Editing recipe number " + id);
 
         return "/recipe/recipeform";
+    }
+
+    @RequestMapping("/recipe/{id}/delete")
+    public String deleteRecipeById(@PathVariable String id, Model model) throws Exception {
+        recipeService.deleteById(new Long(id));
+        log.debug("Deleting recipe number " + id);
+
+        return "redirect:/index";
     }
 
     @PostMapping
