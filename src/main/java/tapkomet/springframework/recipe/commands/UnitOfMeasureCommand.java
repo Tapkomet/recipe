@@ -5,8 +5,7 @@ import lombok.*;
 /**
  * Created by Tapkomet on 2/12/2020
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

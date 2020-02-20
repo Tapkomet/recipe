@@ -71,6 +71,9 @@ class RecipeToRecipeCommandTest {
                 .description(DESCRIPTION).difficulty(DIFFICULTY).directions(DIRECTIONS).servings(SERVINGS)
                 .source(SOURCE).url(URL).notes(notes).categories(categorySet).ingredients(ingredientSet).build();
 
+        ingredient.setRecipe(recipe);
+        ingredient2.setRecipe(recipe);
+
         //when
         RecipeCommand command = converter.convert(recipe);
 

@@ -11,6 +11,11 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
+@Table(
+        name="INGREDIENT",
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"DESCRIPTION", "RECIPE_ID"})
+)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,6 +37,12 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public String toString() {
+        return "Ingredient(id=" + this.getId() + ", description=" + this.getDescription()
+                + ", amount=" + this.getAmount() + ", unitOfMeasure=" + this.getUnitOfMeasure()
+                + ", recipe=" + this.getRecipe().getDescription() + ")";
     }
 
 }

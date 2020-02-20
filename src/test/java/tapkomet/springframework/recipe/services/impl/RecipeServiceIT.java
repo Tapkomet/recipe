@@ -22,15 +22,18 @@ class RecipeServiceIT {
     private static final String NEW_DESCRIPTION = "New Description";
 
     @Autowired
+    private
     RecipeService recipeService;
 
     @Autowired
+    private
     RecipeRepository recipeRepository;
 
     @Autowired
     RecipeCommandToRecipe recipeCommandToRecipe;
 
     @Autowired
+    private
     RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Transactional

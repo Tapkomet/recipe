@@ -19,7 +19,7 @@ public class IngredientCommandToIngredientTest {
     private static final Long ID_VALUE = 1L;
     private static final Long UOM_ID = 2L;
 
-    IngredientCommandToIngredient converter;
+    private IngredientCommandToIngredient converter;
 
     @BeforeEach
     void setUp() throws Exception {

@@ -10,3 +10,4 @@ INSERT INTO unit_of_measure (name) VALUES ('Kilogram');
 INSERT INTO unit_of_measure (name) VALUES ('Each');
 INSERT INTO unit_of_measure (name) VALUES ('Dash');
 INSERT INTO unit_of_measure (name) VALUES ('Pint');
+

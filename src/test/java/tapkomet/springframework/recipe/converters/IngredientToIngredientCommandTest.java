@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IngredientToIngredientCommandTest {
-    private static final Recipe RECIPE = new Recipe();
     private static final BigDecimal AMOUNT = new BigDecimal("1");
     private static final String DESCRIPTION = "Cheeseburger";
     private static final Long UOM_ID = 2L;
     private static final Long ID_VALUE = 1L;
+    private static final Recipe RECIPE = Recipe.builder().id(ID_VALUE).build();
 
 
     IngredientToIngredientCommand converter;
@@ -41,7 +41,7 @@ class IngredientToIngredientCommandTest {
         //given
 
         Ingredient ingredient = Ingredient.builder().id(ID_VALUE).amount(AMOUNT)
-                .description(DESCRIPTION).unitOfMeasure(null).build();
+                .description(DESCRIPTION).recipe(RECIPE).unitOfMeasure(null).build();
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
@@ -58,11 +58,10 @@ class IngredientToIngredientCommandTest {
         //given
 
 
-
         UnitOfMeasure uom = UnitOfMeasure.builder().id(UOM_ID).build();
 
         Ingredient ingredient = Ingredient.builder().id(ID_VALUE).amount(AMOUNT)
-                .description(DESCRIPTION).unitOfMeasure(uom).build();
+                .description(DESCRIPTION).unitOfMeasure(uom).recipe(RECIPE).build();
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then

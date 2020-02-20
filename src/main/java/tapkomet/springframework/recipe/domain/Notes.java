@@ -25,4 +25,8 @@ public class Notes {
     @Lob
     private String recipeNotes;
 
+    public String toString() {
+        return "Notes(id=" + this.getId() + ", recipe=" + this.getRecipe().getDescription() + ", recipeNotes="
+                + this.getRecipeNotes() + ")";
+    }
 }

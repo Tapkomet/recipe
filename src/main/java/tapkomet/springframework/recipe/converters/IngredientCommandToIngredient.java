@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import tapkomet.springframework.recipe.commands.IngredientCommand;
 import tapkomet.springframework.recipe.domain.Ingredient;
+import tapkomet.springframework.recipe.domain.Recipe;
 
 /**
  * Created by Tapkomet on 2/12/2020
@@ -26,8 +27,8 @@ import tapkomet.springframework.recipe.domain.Ingredient;
         if (source == null) {
             return null;
         }
-
         return Ingredient.builder().id(source.getId()).description(source.getDescription())
-                .amount(source.getAmount()).unitOfMeasure(uomConverter.convert(source.getUnitOfMeasure())).build();
+                .amount(source.getAmount()).recipe(Recipe.builder().id(source.getRecipeId()).build())
+                .unitOfMeasure(uomConverter.convert(source.getUnitOfMeasure())).build();
     }
 }
