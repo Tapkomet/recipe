@@ -38,7 +38,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
         final RecipeCommand command = RecipeCommand.builder().id(source.getId()).cookTime(source.getCookTime())
                 .prepTime(source.getPrepTime()).description(source.getDescription()).difficulty(source.getDifficulty())
                 .directions(source.getDirections()).servings(source.getServings()).source(source.getSource())
-                .url(source.getUrl()).categories(new HashSet<>())
+                .url(source.getUrl()).categories(new HashSet<>()).image(source.getImage())
                 .ingredients(new HashSet<>()).notes(notesConverter.convert(source.getNotes())).build();
 
 

@@ -32,7 +32,7 @@ public class Recipe {
     private String directions;
 
     @Lob
-    private Byte[] image;
+    private byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
