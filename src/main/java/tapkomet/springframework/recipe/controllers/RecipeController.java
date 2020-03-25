@@ -1,10 +1,13 @@
 package tapkomet.springframework.recipe.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import tapkomet.springframework.recipe.commands.RecipeCommand;
+import tapkomet.springframework.recipe.exceptions.NotFoundException;
 import tapkomet.springframework.recipe.services.RecipeService;
 
 /**
@@ -58,5 +61,17 @@ public class RecipeController {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception e) {
+        log.error("Handling not found exception");
+        log.error(e.getMessage());
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", e);
+        return modelAndView;
     }
 }

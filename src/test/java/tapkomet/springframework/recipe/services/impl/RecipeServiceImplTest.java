@@ -7,6 +7,7 @@ import org.mockito.MockitoAnnotations;
 import tapkomet.springframework.recipe.converters.RecipeCommandToRecipe;
 import tapkomet.springframework.recipe.converters.RecipeToRecipeCommand;
 import tapkomet.springframework.recipe.domain.Recipe;
+import tapkomet.springframework.recipe.exceptions.NotFoundException;
 import tapkomet.springframework.recipe.repositories.RecipeRepository;
 
 import java.util.Arrays;
@@ -66,6 +67,21 @@ class RecipeServiceImplTest {
         assertNotNull(returnedRecipe, "Null recipe returned");
         verify(recipeRepository, times(1)).findById(RECIPE_ID);
         verify(recipeRepository, never()).findAll();
+    }
+
+
+    @Test
+    void getRecipeByIdNotFound() {
+        Optional<Recipe> optionalRecipe = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(optionalRecipe);
+
+        //Recipe recipeReturned = recipeService.findById(1L);
+
+        NotFoundException thrown = assertThrows(NotFoundException.class,
+                () -> recipeService.findById(1L));
+
+        assertTrue(thrown.getMessage().contains("Recipe not found"));
     }
 
     @Test
